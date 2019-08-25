@@ -77,7 +77,7 @@ pipenv run flask run
 
 For this project, we used **pre-trained model [MobileNetV2](https://keras.io/applications/#mobilenetv2)** from keras. MobileNetV2 is a model that was trained on a large dataset to solve a **similar problem to this project**, so it will help us to save lots of time on buiding low-level model and focus on the application.
 
-*Note that we assumed you have knowledge about CNN architecture. If this is not the case, you can learn  
+* **Note:** You can learn more about CNN architecture in this [link](https://medium.com/@RaghavPrabhu/understanding-of-convolutional-neural-network-cnn-deep-learning-99760835f148).  
 
 ![](https://www.datascience.com/hs-fs/hubfs/CNN%202.png?width=650&name=CNN%202.png)
 
