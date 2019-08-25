@@ -11,7 +11,7 @@ This is the project that we finished after the 6th week of studying **Machine Le
 
 
 ## INTRODUCTION
-### 1. ThDataset
+### 1. The Dog vs. Cat Dataset
 **Dogs vs. Cats** [dataset](https://www.kaggle.com/c/dogs-vs-cats/data) provided by  Microsoft Research contains 25,000 images of dogs and cats with the labels 
 * 1 = dog
 * 0 = cat 
