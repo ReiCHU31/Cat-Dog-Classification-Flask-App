@@ -11,7 +11,7 @@ This is the project that we finished after the 6th week of studying **Machine Le
 
 
 ## INTRODUCTION
-### 1. Dataset
+### 1. The Dogs vs. Cats dataset
 **Dogs vs. Cats** [dataset](https://www.kaggle.com/c/dogs-vs-cats/data) provided by  Microsoft Research contains 25,000 images of dogs and cats with the labels 
 * 1 = dog
 * 0 = cat 
@@ -71,7 +71,7 @@ Run the model by
 pipenv run flask run
 ```
 
-## HOW IT WORK: CONVOLUTIONAL NEURAL NETWORK CNN
+## HOW IT WORK: CONVOLUTIONAL NEURAL NETWORK (CNN)
 
 > In deep learning, a [convolutional neural network](https://en.wikipedia.org/wiki/Convolutional_neural_network) (CNN, or ConvNet) is a class of deep neural networks, most commonly applied to analyzing visual imagery. (Wiki)
 
