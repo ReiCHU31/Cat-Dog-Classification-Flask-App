@@ -11,7 +11,7 @@ This is the project that we finished after the 6th week of studying **Machine Le
 
 
 ## INTRODUCTION
-### 1. The Dogs vs. Cats dataset
+### 1. ThDataset
 **Dogs vs. Cats** [dataset](https://www.kaggle.com/c/dogs-vs-cats/data) provided by  Microsoft Research contains 25,000 images of dogs and cats with the labels 
 * 1 = dog
 * 0 = cat 
@@ -75,16 +75,109 @@ pipenv run flask run
 
 > In deep learning, a [convolutional neural network](https://en.wikipedia.org/wiki/Convolutional_neural_network) (CNN, or ConvNet) is a class of deep neural networks, most commonly applied to analyzing visual imagery. (Wiki)
 
-For this project, we used **pre-trained model [MobileNetV2](https://keras.io/applications/#mobilenetv2)** from keras. MobileNetV2 is a model that was trained on a large dataset to solve a **similar problem to this project**, so it will help us to save lots of time on buiding low-level model and focus on the application.
+For this project, we used **pre-trained model [MobileNetV2](https://keras.io/applications/#mobilenetv2)** from keras. MobileNetV2 is a model that was trained on a large dataset to solve a **similar problem to this project**, so it will help us to save lots of time on buiding low-level layers and focus on the application.
 
-* **Note:** You can learn more about CNN architecture in this [link](https://medium.com/@RaghavPrabhu/understanding-of-convolutional-neural-network-cnn-deep-learning-99760835f148).  
+**Note that we assumed you have knowledge about CNN architecture. If this is not the case, you can learn more about it [here](https://medium.com/@RaghavPrabhu/understanding-of-convolutional-neural-network-cnn-deep-learning-99760835f148)*  
 
 ![](https://www.datascience.com/hs-fs/hubfs/CNN%202.png?width=650&name=CNN%202.png)
 
 ### 1. Load and preprocess images:
 
 - Import **path, listdir** from **os library**.
-- Find and save all the image path to **all_image_path** dataset is in folder `train`. 
+- Find and save all the image's path to **all_image_paths**. (note that our images is in folder `train`). 
+
+```python 
+all_image_path = [path.join('train', p) for p in listdir('train') if isfile(path.join('train', p))]
+```
+
+- Define a function to load and preprocess image from path:
+
+```python
+def load_and_preprocess_image(path):
+    file = tf.io.read_file(path)
+    image = tf.image.decode_jpeg(file , channels=3)
+    image = tf.image.resize(image, [192, 192]) # resize all images to the same size.
+    image /= 255.0  # normalize to [0,1] range
+    image = 2*image-1  # normalize to [-1,1] range
+    return image
+```
+
+- Load and preprocess all images which path is in **all_image_path**:
+
+```python
+all_images = [load_and_preprocess_image(path) for path in all_image_path]
+```
+- Save all image labels in **all_image_labels**:
+
+```python
+dict = {'cat': 0, 'dog': 1}
+
+# path.split('.')[0][-3:] return the name of the image ('dog' or 'cat')
+labels = [path.split('.')[0][-3:] for path in all_image_path] 
+
+# Transfer name-labels to number-labels:
+all_image_labels = [dict[label] for label in labels]
+```
+
+- To implement batch training, we put the images and labels into Tensorflow dataset:
+
+```python
+ds = tf.data.Datasets.from_tensor_slices((all_images, all_image_labels))
+```
+
+### 2. Building CNN model: 
+
+The CNN model contain **MobileNetV2, Pooling, fully-connected hidden layer and Output layer**.
+
+- First we create **mobile_net** as an instance of **MobileNetV2**:
+
+```python
+mobile_net = tf.keras.applications.MobileNetV2(input_shape=(192, 192, 3), include_top=False)
+mobile_net.trainable=False # this told the model not to train the mobile_net.
+```
+
+- Then we build CNN model:
+
+```python
+cnn_model = keras.models.Sequential([
+    mobile_net, # mobile_net is low-level layers
+    keras.layers.GlobalAveragePooling2D(), 
+    keras.layers.Flatten(), 
+    keras.layers.Dense(64, activation="relu"), # fully-connected hidden layer 
+    keras.layers.Dense(2, activation="softmax") # output layer
+])
+```
+
+### 3. Training model:
+
+We almost there! But before training our **cnn_model**, we need to implement batch to the training data so that the model will train faster.
+
+```python
+BATCH_SIZE = 32
+AUTOTUNE = tf.data.experimental.AUTOTUNE
+
+train_ds = ds.shuffle(buffer_size = len(all_image_labels))
+train_ds = train_ds.repeat()
+train_ds = train_ds.batch(BATCH_SIZE)
+train_ds = train_ds.prefetch(buffer_size=AUTOTUNE)
+```
+
+Now we train the model.
+
+```python
+cnn_model.compile(optimizer=tf.keras.optimizers.Adam(),
+              loss='sparse_categorical_crossentropy',
+              metrics=["accuracy"])
+```
+
+```python
+steps_per_epoch=tf.math.ceil(len(all_image_dirs)/BATCH_SIZE).numpy()
+cnn_model.fit(train_ds, epochs=2, steps_per_epoch=steps_per_epoch)
+```
+After training, save the model for later use.
+```python
+cnn_model.save('my_model.h5')
+```
 
 ## MODEL PERFOMANCE SUMARY
 Our model has the accuracy of **97.79 %** for the train dataset and **97.32 %** for the test dataset. 
