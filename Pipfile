@@ -1,0 +1,23 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+
+[requires]
+python_version = "3.7"
+
+[packages]
+flask = "*"
+tensorflow = "==2.0.0beta-1"
+
+[dev-packages]
+black = "==19.3b0"
+flake8 = "*"
+isort = "*"
+mypy = "*"
+pre-commit = "*"
+pytest-cov = "*"
+v = {editable = true,version = "*"}
+
+[pipenv]
+allow_prereleases = true

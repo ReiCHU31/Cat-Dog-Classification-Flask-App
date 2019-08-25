@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Ultimate Dog and Cat Classifier</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <style>
+
+.hero {
+    background: black url(static/images/catdog.jpg) center / cover;
+}
+    </style>
+
+  </head>
+
+    
+<body>
+
+<!-- .hero -->
+<section class="hero is-fullheight" has-background-black>
+
+    <section class="section">
+        <div class="container">
+            <h1 class="title">
+                Dog & Cat Classifier
+            </h1>
+            <p class="subsubtitle">
+                by <strong>Phuong T.M. Chu</strong> & <strong>Minh H. Nguyen</strong>
+            </p>
+        </div>   
+        </section> 
+
+
+    <section class="section">
+        <div class="container has-text-centered bg-text" style="width: 100%">
+                <p class="subtitle" style="color:black">
+                  Check if your furry friend is truly a <strong>Dog</strong> or <strong>Cat</strong>!
+                </p>
+              <div>
+                <i class="arrow_down"></i>
+                <form action="/classify" method="post" enctype="multipart/form-data" style="margin-top: 30px; width: 80%; text-align: center; margin: auto;">
+                  <div class="file has-name is-centered">     
+                      <label class="file-label">
+                        <input class="file-input" type="file" id="image" name = "image">
+                        <span class="file-cta">
+                          <span class="file-label">
+                            Upload an image
+                          </span>
+                        </span>
+                        <span class="file-name" id="file-name">
+                          No file chosen
+                        </span>
+      
+                      </label>
+                    </div>
+                    <br>
+                    <input type="submit" value="Classify" class="button is-black" name = "image" id="classify_button">
+                </form>
+      
+                </div>
+               
+              </div>
+            </div>
+        </div>
+</section>
+
+
+<nav class="level">
+
+        <div class="level-item has-text-centered">
+          <div>
+            <a class="navbar-item" href="https://github.com/ReiCHU31">
+                <img src="static/images/iconphuong.png" alt="Bulma: Free, open source, &amp; modern CSS framework based on Flexbox" style="max-height: 100%;">
+            </a>
+          </div>
+        </div>
+
+        <div class="level-item has-text-centered">
+          <div>
+            <a class="navbar-item" href="https://github.com/minhhuu291">
+                <img src="static/images/Minh_logo_final.png" alt="Bulma: Free, open source, &amp; modern CSS framework based on Flexbox" width="144" height="700">
+            </a>
+            <p class="heading" style="color:white"><strong>Minh H. Nguyen</strong></p>
+          </div>
+        </div>
+      </nav>
+
+</section>
+
+
+<!-- .section -->
+<section class="bd-footer-link">
+        <div class="container">
+            <div class="columns">
+                <div class="column">
+                        <article class="media notification has-background-white">
+                            <div class="media-content">
+                                <div class="content">
+                                    <p class="subsubtitle">
+                                    <strong>Contact</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                <div class="column">
+                    <article class="media notification has-background-white">
+                        <div class="media-content">
+                            <div class="content">
+                                <div class="columns">
+                                    <div class="column">
+                                        <p class="subsubtitle">
+                                            <strong>Phuong Chu</strong>
+                                        </p>
+                                    </div>
+                                    <div class="column">
+                                        <a class="navbar-item" href="https://www.linkedin.com/in/phuong-t-m-chu/">
+                                            <figure class="media-content">
+                                                    <span class="icon">
+                                                        <i class="fab fa-lg fa-linkedin"></i>
+                                                    </span>
+                                            </figure>
+                                        </a>
+                                    </div>
+                                    <div class="column">
+                                        <a class="navbar-item" href="https://github.com/ReiCHU31">
+                                            <figure class="media-content">
+                                                    <span class="icon">
+                                                        <i class="fab fa-lg fa-github"></i>
+                                                    </span>
+                                            </figure>
+                                        </a>
+                                    </div>
+                                    <div class="column">
+                                        <a class="navbar-item" href="mailto:chuthiminhphuong31@gmail.com">
+                                            <figure class="media-content">
+                                                    <span class="icon">
+                                                        <i class="fas fa-lg fa-envelope-open-text"></i>
+                                                    </span>
+                                            </figure>
+                                        </a>
+                                    </div>
+                                    <div class="column">
+                                            <a class="navbar-item" href="https://twitter.com/">
+                                                <figure class="media-content">
+                                                        <span class="icon">
+                                                            <i class="fab fa-lg fa-twitter"></i>
+                                                        </span>
+                                                </figure>
+                                            </a>
+                                        </div>
+                                    <div class="column">
+                                            <p class="subsubtitle">
+                                                <strong>Minh Nguyen</strong>
+                                            </p>
+                                        </div>
+                                        <div class="column">
+                                            <a class="navbar-item" href="https://www.linkedin.com/in/minh-huu-5630ba59/">
+                                                <figure class="media-content">
+                                                        <span class="icon">
+                                                            <i class="fab fa-lg fa-linkedin"></i>
+                                                        </span>
+                                                </figure>
+                                            </a>
+                                        </div>
+                                        <div class="column">
+                                            <a class="navbar-item" href="https://github.com/minhhuu291">
+                                                <figure class="media-content">
+                                                        <span class="icon">
+                                                            <i class="fab fa-lg fa-github"></i>
+                                                        </span>
+                                                </figure>
+                                            </a>
+                                        </div>
+                                        <div class="column">
+                                            <a class="navbar-item" href="mailto: minhhuu291@gmail.com">
+                                                <figure class="media-content">
+                                                        <span class="icon">
+                                                            <i class="fas fa-lg fa-envelope-open-text"></i>
+                                                        </span>
+                                                </figure>
+                                            </a>
+                                        </div>
+                                </div>
+                            </div>    
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.section -->
+<!-- /.hero -->
+
+
+<script src="/static/script.js"></script>
+</body>
+</html>
