@@ -83,13 +83,14 @@ pipenv install tensorflow==2.0.0beta-1
 ```
 export FLASK_DEBUG=1
 ```
-* If you want to exit `pipenv shell`, use `exit`
 
 * Run the model by 
 
 ```shell
 pipenv run flask run
 ```
+
+* If you want to exit `pipenv shell`, use `exit`
 
 ## HOW IT WORK: CONVOLUTIONAL NEURAL NETWORK (CNN)
 
