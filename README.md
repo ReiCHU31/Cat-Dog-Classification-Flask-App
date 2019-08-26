@@ -50,7 +50,7 @@ During this project, we need to answer these following questions:
 
 
 ## SETUP ENVIRONMENT
-In order to run our model on a Flask application locally, you need to clone this repository and then set up the environment by these following commands:
+* In order to run our model on a Flask application locally, you need to clone this repository and then set up the environment by these following commands:
 
 ```shell
 python3 -m pip install --user pipx
@@ -65,7 +65,27 @@ pipenv install --dev
 pipenv run pre-commit install -t pre-commit
 pipenv run pre-commit install -t pre-push
 ```
-Run the model by 
+* On the Terminal, use these commands:
+```
+# enter the environment
+pipevn shell
+pipenv graph
+set FLASK_APP=app.py
+set FLASK_ENV=development
+export FLASK_DEBUG=1
+flask run
+```
+* If you have error `ModuleNotFoundError: No module named 'tensorflow'` then use
+```
+pipenv install tensorflow==2.0.0beta-1
+```
+* If  `* Debug mode: off` then use
+```
+export FLASK_DEBUG=1
+```
+* If you want to exit `pipenv shell`, use `exit`
+
+* Run the model by 
 
 ```shell
 pipenv run flask run
